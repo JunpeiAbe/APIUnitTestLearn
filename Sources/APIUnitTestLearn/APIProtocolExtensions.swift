@@ -25,7 +25,7 @@ extension APIClientProtocol {
         config.timeoutIntervalForResource = 30
         let urlSession = URLSession(configuration: config)
         do {
-            var (data, urlResponse) = try await urlSession.data(for: urlRequest)
+            let (data, urlResponse) = try await urlSession.data(for: urlRequest)
             guard let urlResponse = urlResponse as? HTTPURLResponse
             else {
                 return Result(error: .responseError)
@@ -70,9 +70,9 @@ extension APIClientProtocol {
 }
 
 extension APIRequestable {
-    var baseURL: URL? {
-        return URL(string: "https://api.exmaple.com")
-    }
+//    var baseURL: URL? {
+//        return URL(string: "https://api.exmaple.com")
+//    }
     var url: URL? {
         return baseURL?.appending(component: path)
     }
