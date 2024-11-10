@@ -2,7 +2,8 @@ import Foundation
 
 /// APIクライアントの定義
 protocol APIClientProtocol {
-    func request<Request: APIRequestable>(_ request: Request) async throws -> Result<Request.Response>
+    associatedtype Request: APIRequestable
+    func request(_ request: Request) async -> Result<Request.Response>
 }
 /// APIリクエストの定義
 protocol APIRequestable: Encodable {
@@ -15,15 +16,15 @@ protocol APIRequestable: Encodable {
 }
 
 /// APIレスポンスの定義
-protocol APIResponsable: Decodable {}
+protocol APIResponsable: Codable {}
 
 /// HTTPメソッド
-enum HttpMethod: String {
+enum HttpMethod: String, Encodable {
     case get = "GET"
     case post = "POST"
 }
 /// HTTPヘッダー
-struct HttpHeaders {
+struct HttpHeaders: Encodable {
     var headers: [String : String] = [:]
 }
 /// HTTPボディ

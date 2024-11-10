@@ -1,7 +1,7 @@
 import Foundation
 
 extension APIClientProtocol {
-    func request<Request: APIRequestable>(_ request: Request) async -> Result<Request.Response> {
+    func request(_ request: Request) async -> Result<Request.Response> {
         /// リクエストURLチェック
         guard let url = request.url else {
             return Result(error: .invalidURL)
